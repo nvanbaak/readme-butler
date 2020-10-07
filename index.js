@@ -15,5 +15,13 @@ inq.prompt([
         message:"What does it do?",
         type:"input",
         name:"projDesc"
+    } , {
+        message:"What steps does the user need to take to install the project? (leave blank if none)",
+        name:"install"
+    } , {
+        message:"What's the program workflow?",
+        name:"workflow"
+    } , {
+        
     }
 ])
