@@ -108,15 +108,47 @@ async function addFeature(partialReadme) {
         }
 
     // Once we're out of the loop, we move on
-    writeReadme(partialReadme);
+    finishReadme(partialReadme);
 
     } catch (err) {
         throw err;
     }
 }
 
+// Gets the information to complete the Credits 
+async function finishReadme(partialReadme) {
+    try {
+
+        let accomplices = [];
+        let teamLoop = true;
+
+        // First we cycle through teammates until done
+        while (teamLoop) {
+
+            let { teammate } = inq.prompt({
+                name:"teammate",
+                message:"Enter the Github page of a teammate or leave blank to skip"
+            })
+
+            // If they gave us a link, we push it
+            if (teammate) {
+                accomplices.push(teammate);
+
+            } else {
+                // else we're done
+                teamLoop = false;
+            }
+        }
 
 
+
+        // And we're done!  Write our masterpiece to a file
+        writeReadme(partialReadme);
+
+    } catch (err) {
+        throw err;
+    }
+}
 
 
 // This function takes a string and writes it readme.md
