@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { OutgoingMessage } = require("http");
 
 function generateReadmeTop(name, description, install, workflow) {
 
@@ -74,9 +75,29 @@ ${screenshotStr}`
     return newSection;
 }
 
-
+// This function generates the Credits and License sections of the readme
 function generateReadmeBottom(githubArray, license) {
 
+    let contributorStr;
+
+    // If there's more than one contributor, we make contributors a subsection.  Otherwise we just use the user's github.
+    if (githubArray.length > 0) {
+        contributorStr = `### Contributors\n\n`;
+
+        // Loop through contributors
+        for (let i = 0; i < githubArray.length; i++) {
+            contributorStr += `https://github.com/${githubArray[i]}/`;
+        }
+    } else {
+        contributorStr = ``;
+    }
+
+
+
+
+    let outputStr = `## Credits
+
+### Contributors`
 }
 
 

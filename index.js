@@ -127,7 +127,7 @@ async function finishReadme(partialReadme) {
 
             let { teammate } = await inq.prompt({
                 name:"teammate",
-                message:"Enter the Github page of a teammate or leave blank to skip"
+                message:"Enter the Github page of a teammate or leave blank to skip (yours is generated automatically)"
             })
 
             // If they gave us a link, we push it
