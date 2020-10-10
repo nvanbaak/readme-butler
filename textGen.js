@@ -60,7 +60,7 @@ function generateUsage(header, description, screenshot, alt) {
 
     // Figure out if there's a screenshot
     if (screenshot) {
-        screenshotStr = `[${alt}]()./Assets/${screenshot})\n\n`;
+        screenshotStr = `[${alt}](./Assets/${screenshot})\n\n`;
     } else {
         screenshotStr = "";
     }

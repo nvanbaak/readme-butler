@@ -79,21 +79,25 @@ async function addFeature(partialReadme) {
                     type:"input"
                 } , {
                     name:"screenshot",
-                    message:"Enter the filename of a relevant screenshot (Readme Generator will look for that file in the Assets folder).  Leave blank to skip screenshot."
+                    message:"Enter the filename of a relevant screenshot (Readme Generator will look for that file in the Assets folder).  Leave blank to skip screenshot.",
+                    type:"input"
                 }]);
 
                 // If the user has a screenshot, we ask for an alt
-                let imgAlt;
+                let imgAltStr;
+                console.log(screenshot);
 
                 if (screenshot) {
-                    imgAlt = await inq.prompt({
+                    let { imgAlt } = await inq.prompt({
                         name:"imgAlt",
                         message:"Give your screenshot an alt text"
                     });
+
+                    imgAltStr = imgAlt
                 } // end of alt acquisition
 
                 // Make a new section
-                let newSection = textGen.generateUsage(header, featureDesc, screenshot, imgAlt);
+                let newSection = textGen.generateUsage(header, featureDesc, screenshot, imgAltStr);
 
                 // Add it to the existing readme
                 partialReadme = partialReadme + newSection;
