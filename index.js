@@ -33,7 +33,7 @@ inq.prompt([
     // Check for install default
     if(!response.install) {
         // If the user didn't enter special instructions we use the default
-        installStr = `${response.name} can be installed by entering the following command in the app's directory:
+        installStr = `${response.projName} can be installed by entering the following command in the app's directory:
 \`\`\`
 npm install
 \`\`\`
