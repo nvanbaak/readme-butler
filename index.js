@@ -41,22 +41,20 @@ inq.prompt([
 });
 
 // Given a readme that has been written up to the usage section, this function recursively fires until the user signals they're done
-function addFeature(partialReadme) {
-    // We start by asking if the user would like to add a feature
-    inq.prompt([
-        {
-            name:"addFeature",
-            message:"Would you like to add a feature?",
-            type:"list",
-            choices:["yes","no"]
-        }
-    ]).then(answers=> {
-        if (answers.addFeature === "yes") {
-            // another inquirer prompt
+async function addFeature(partialReadme) {
+    try {
+        // We start by asking if the user would like to add a feature
+        let addFunction = await inq.prompt({
+                name:"addFeature",
+                message:"Would you like to add a feature?",
+                type:"list",
+                choices:["yes","no"]
+            });
+        // If yes, we run another inquirer prompt to get the details
+        if (addFunction === "yes") {
 
-            console.log("added a feature!");
-
-            inq.prompt([{
+            // This block makes an inquirer call and destructures the response
+            let {header, featureDesc, screenshot} = await inq.prompt([{
                 name:"header",
                 message:"What's the feature?",
                 type:"input"
@@ -67,18 +65,37 @@ function addFeature(partialReadme) {
             } , {
                 name:"screenshot",
                 message:"Enter the filename of a relevant screenshot (Readme Generator will look for that file in the Assets folder).  Leave blank to skip screenshot."
-            }]).then(response=>{
+            }]);
 
-                // Then we run the function again in case they want to add more features
-                addFeature(partialReadme);
-            })
+            // If the user has a screenshot, we ask for an alt
+            let imgAlt;
 
+            if (screenshot) {
+                imgAlt = await inq.prompt({
+                    name:"imgAlt",
+                    message:"Give your screenshot an alt text"
+                });
+            } // end of alt acquisition
 
+            // Make a new section
+            let newSection = textGen.generateUsage(response.header, response.featureDesc, response.screenshot, imgAlt);
+
+            // Add it to the existing readme
+            let outputStr = partialReadme + newSection;
+            
+            // Then we run the function again in case they want to add more features
+            addFeature(outputStr);
+
+        // If the user said they didn't want to add a new feature...
         } else {
-            // move on to next section
+
+            // Then we proceed
             writeReadme(partialReadme);
+
         }
-    });
+    } catch (err) {
+        throw err;
+    }
 }
 
 

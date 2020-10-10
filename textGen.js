@@ -52,9 +52,24 @@ ${workflow}\n\n`
     return outputStr;
 }
 
+// This function constructs a markdown string for one subsection of the usage section
+function generateUsage(header, description, screenshot, alt) {
 
-function generateUsage(readmeStr) {
+    let screenshotStr;
 
+    // Figure out if there's a screenshot
+    if (screenshot) {
+        screenshotStr = `[${alt}]()./Assets/${screenshot})\n\n`
+    }
+
+    // Once the screenshot's good to go, we generate the template
+    let newSection = `### ${header}
+
+${description}
+
+${screenshotStr}`
+
+    return newSection;
 }
 
 
