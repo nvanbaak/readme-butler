@@ -125,7 +125,7 @@ async function finishReadme(partialReadme) {
         // First we cycle through teammates until done
         while (teamLoop) {
 
-            let { teammate } = inq.prompt({
+            let { teammate } = await inq.prompt({
                 name:"teammate",
                 message:"Enter the Github page of a teammate or leave blank to skip"
             })
@@ -140,7 +140,33 @@ async function finishReadme(partialReadme) {
             }
         }
 
+        // Next we ask for any third party assets 
+        let assetLoop = true;
 
+        while (assetLoop) {
+
+            let { thirdParty } = await inq.prompt({
+                name:"thirdParty",
+                message:"Do you want to credit any third party assets?",
+                type:"list",
+                choices:["yes","no"]
+            })
+
+            if (thirdParty === "yes") {
+                // Ask for more information
+            } else {
+                // Shut down the loop
+                assetLoop = false;
+            }
+        }
+
+        // Choose license
+        let { license } = await inq.prompt({
+            name:"license",
+            message:"Choose a license for this project",
+            type:"list",
+            choices:["MIT","GNU"]
+        });
 
         // And we're done!  Write our masterpiece to a file
         writeReadme(partialReadme);
