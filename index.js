@@ -193,7 +193,7 @@ async function finishReadme(partialReadme) {
 function writeReadme(outputStr) {
 
     // Output function
-    fs.writeFile("./Output/readme.md",outputStr,"utf8",function(err) {
+    fs.writeFile("./Output/README.md",outputStr,"utf8",function(err) {
         if (err) throw err;
     });
     

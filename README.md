@@ -1,6 +1,5 @@
-# soifej
+# Readme Generator
 
-![dependency-badge](https://img.shields.io/requires/github/nvanbaak/readme-generator)
 ![repo-size-badge](https://img.shields.io/github/repo-size/nvanbaak/readme-generator)
 ![license-badge](https://img.shields.io/github/license/nvanbaak/readme-generator)
 
@@ -13,20 +12,42 @@
 
 ## Description
 
-askd  gor
+Writing readmes is repetitive and boring.  So I made a script to do it for you!
 
 ## Installation
 
-s
+Readme Generator can be installed by entering the following command in the app's directory:
+```
+npm install
+```
+
+This should install the necessary npm packages and allow the app to run.
 
 ## Usage
 
-sdf
+Once you call the app, you'll be presented with a sequence of Inquirer prompts.  The app takes your answers to generate a readme with markdown styling.  Once you've completed the questions, the readme will be generated in the Output folder.
 
-### sfijo
+### Automatic Looping
 
-sdnknoiew
+Certain sections of the readme are extensible, e.g. you can keep adding content until you say you're done.
 
-[sdnfoiue](./Assets/blah.png)
+[Readme Generator allows for an arbitrary number of features before moving on](./Assets/featurelooping.png)
 
-undefined
+## Credits
+
+* Created by https://github.com/nvanbaak/
+
+## Planned Features:
+
+* Several sections are hardcoded to my name and this repo; future updates will let you pick
+* The ability to add third-party resources to the Credits section
+* An automatic Planned Features section
+* Generate readme in the folder that Readme Generator was called in
+* Better name
+
+## License
+
+This project uses the GNU license.
+
+------
+© 2020 Nik Van Baak
