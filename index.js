@@ -40,59 +40,68 @@ inq.prompt([
 
 });
 
-// Given a readme that has been written up to the usage section, this function recursively fires until the user signals they're done
+// Given a readme that has been written up to the usage section, this function fires until the user signals they're done
 async function addFeature(partialReadme) {
     try {
-        // We start by asking if the user would like to add a feature
-        let addFunction = await inq.prompt({
-                name:"addFeature",
-                message:"Would you like to add a feature?",
-                type:"list",
-                choices:["yes","no"]
+
+        // We keep looping until the user tells us they're done in the else block
+        let keepLooping = true;
+
+        while (keepLooping) {
+
+            // We start by asking if the user would like to add a feature
+            let { addFeature }= await inq.prompt({
+                    name:"addFeature",
+                    message:"Would you like to add a feature?",
+                    type:"list",
+                    choices:["yes","no"]
             });
-        // If yes, we run another inquirer prompt to get the details
-        if (addFunction === "yes") {
 
-            // This block makes an inquirer call and destructures the response
-            let {header, featureDesc, screenshot} = await inq.prompt([{
-                name:"header",
-                message:"What's the feature?",
-                type:"input"
-            } , {
-                name:"featureDesc",
-                message:"Describe the feature in more detail",
-                type:"input"
-            } , {
-                name:"screenshot",
-                message:"Enter the filename of a relevant screenshot (Readme Generator will look for that file in the Assets folder).  Leave blank to skip screenshot."
-            }]);
+            // If yes, we run another inquirer prompt to get the details
+            if (addFeature === "yes") {
 
-            // If the user has a screenshot, we ask for an alt
-            let imgAlt;
+                // This block makes an inquirer call and destructures the response
+                let {header, featureDesc, screenshot} = await inq.prompt([{
+                    name:"header",
+                    message:"What's the feature?",
+                    type:"input"
+                } , {
+                    name:"featureDesc",
+                    message:"Describe the feature in more detail",
+                    type:"input"
+                } , {
+                    name:"screenshot",
+                    message:"Enter the filename of a relevant screenshot (Readme Generator will look for that file in the Assets folder).  Leave blank to skip screenshot."
+                }]);
 
-            if (screenshot) {
-                imgAlt = await inq.prompt({
-                    name:"imgAlt",
-                    message:"Give your screenshot an alt text"
-                });
-            } // end of alt acquisition
+                // If the user has a screenshot, we ask for an alt
+                let imgAlt;
 
-            // Make a new section
-            let newSection = textGen.generateUsage(response.header, response.featureDesc, response.screenshot, imgAlt);
+                if (screenshot) {
+                    imgAlt = await inq.prompt({
+                        name:"imgAlt",
+                        message:"Give your screenshot an alt text"
+                    });
+                } // end of alt acquisition
 
-            // Add it to the existing readme
-            let outputStr = partialReadme + newSection;
-            
-            // Then we run the function again in case they want to add more features
-            addFeature(outputStr);
+                // Make a new section
+                let newSection = textGen.generateUsage(header, featureDesc, screenshot, imgAlt);
 
-        // If the user said they didn't want to add a new feature...
-        } else {
+                // Add it to the existing readme
+                partialReadme = partialReadme + newSection;
 
-            // Then we proceed
-            writeReadme(partialReadme);
+            // If the user said they didn't want to add a new feature...
+            } else {
 
+                // Stop the loop
+                keepLooping = false;
+
+            }
         }
+
+    // Once we're out of the loop, we move on
+    writeReadme(partialReadme);
+
     } catch (err) {
         throw err;
     }
