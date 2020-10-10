@@ -47,15 +47,23 @@ async function addFeature(partialReadme) {
         // We keep looping until the user tells us they're done in the else block
         let keepLooping = true;
 
+        // What's a nother?  Stay tuned!
+        let nother = "";
+
         while (keepLooping) {
+
+            console.log(`\n******\n`);
 
             // We start by asking if the user would like to add a feature
             let { addFeature }= await inq.prompt({
                     name:"addFeature",
-                    message:"Would you like to add a feature?",
+                    message:`Would you like to add a${nother} feature?`,
                     type:"list",
                     choices:["yes","no"]
             });
+
+            // Put the "nother" in "another"
+            nother = "nother";
 
             // If yes, we run another inquirer prompt to get the details
             if (addFeature === "yes") {
