@@ -24,6 +24,10 @@ This should install the necessary npm packages and allow the app to run.`;
     // Build readme page
     outputStr = `# ${name}
 
+![dependency-badge](https://img.shields.io/requires/github/nvanbaak/readme-generator)
+![repo-size-badge](https://img.shields.io/github/repo-size/nvanbaak/readme-generator)
+
+
 ## Table of Contents
 * [Description](#description)
 * [Installation](#installation)
