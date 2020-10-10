@@ -75,9 +75,13 @@ ${screenshotStr}`
 }
 
 
+function generateReadmeBottom(githubArray, license) {
+
+}
 
 
 module.exports = {
     generateReadmeTop,
-    generateUsage
+    generateUsage,
+    generateReadmeBottom,
 }

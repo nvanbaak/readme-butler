@@ -170,7 +170,11 @@ async function finishReadme(partialReadme) {
             choices:["MIT","GNU"]
         });
 
-        // TO DO: we still need to format this data into a markdown string
+        // Make a markdown string using the information
+        let readmeBottom = textGen.generateReadmeBottom(accomplices, license);
+
+        // Add to in progress readme
+        partialReadme += readmeBottom;
 
         // And we're done!  Write our masterpiece to a file
         writeReadme(partialReadme);
