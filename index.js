@@ -25,23 +25,16 @@ inq.prompt([
     }
 ]).then((response) => {
 
-    let installStr;
-    
-    // Check for install default
-    if(!response.install) {
-        // If the user didn't enter special instructions we use the default
-        installStr = `${response.projName} can be installed by entering the following command in the app's directory:
-        \`\`\`
-        npm install
-        \`\`\`
-        
-        This should install the necessary npm packages and allow the app to run.`;
-    } else {
-        // If the user entered specific instructions we use those instead
-        installStr = response.install;
-    }
+    // Combine the strings that make up the description
+    let descStr = response.projProb + "  " + response.projDesc;
 
+    // Generate the first part of the readme
+    outputStr = textGen.generateReadmeTop(response.projName, descStr, response.install);
 
+    // Start the usage section
+
+    // Output
+    writeReadme(outputStr);
 
 });
 

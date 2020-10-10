@@ -1,6 +1,25 @@
 const fs = require("fs");
 
-function generateReadme(name, description, install) {
+function generateReadmeTop(name, description, install) {
+
+    // First generate install section
+
+    let installStr;
+    
+    // Check for install default
+    if(!install) {
+        // If the user didn't enter special instructions we use the default
+        installStr = `${name} can be installed by entering the following command in the app's directory:
+        \`\`\`
+        npm install
+        \`\`\`
+        
+        This should install the necessary npm packages and allow the app to run.`;
+    } else {
+        // If the user entered specific instructions we use those instead
+        installStr = install;
+    }
+
 
     // Build readme page
     outputStr = `# ${name}
@@ -18,8 +37,15 @@ function generateReadme(name, description, install) {
     
     ## Installation
     
-    ${install}\n\n`
+    ${install}
     
+    ## Usage\n\n`
+    
+
+    // Return completed readme
+    return outputStr;
 }
 
-module.exports = generateReadme();
+module.exports = {
+    generateReadmeTop() 
+}
