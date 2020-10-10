@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-function generateReadmeTop(name, description, install) {
+function generateReadmeTop(name, description, install, workflow) {
 
     // First generate install section
 
@@ -43,7 +43,9 @@ ${description}
 
 ${installStr}
 
-## Usage\n\n`
+## Usage
+
+${workflow}\n\n`
     
 
     // Return completed readme
@@ -51,7 +53,7 @@ ${installStr}
 }
 
 
-function generateUsage(readmeStr, ) {
+function generateUsage(readmeStr) {
 
 }
 

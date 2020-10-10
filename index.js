@@ -22,6 +22,10 @@ inq.prompt([
     } , {
         message:"What steps does the user need to take to install the project? (leave blank if just 'npm install')",
         name:"install"
+    } , {
+        message:"What's the workflow for the app?",
+        type:"input",
+        name:"workflow"
     }
 ]).then((response) => {
 
@@ -29,14 +33,56 @@ inq.prompt([
     let descStr = response.projProb + "  " + response.projDesc;
 
     // Generate the first part of the readme
-    outputStr = textGen.generateReadmeTop(response.projName, descStr, response.install);
+    outputStr = textGen.generateReadmeTop(response.projName, descStr, response.install, response.workflow);
 
     // Start the usage section
-
-    // Output
-    writeReadme(outputStr);
+    addFeature(outputStr);
 
 });
+
+// Given a readme that has been written up to the usage section, this function recursively fires until the user signals they're done
+function addFeature(partialReadme) {
+    // We start by asking if the user would like to add a feature
+    inq.prompt([
+        {
+            name:"addFeature",
+            message:"Would you like to add a feature?",
+            type:"list",
+            choices:["yes","no"]
+        }
+    ]).then(answers=> {
+        if (answers.addFeature === "yes") {
+            // another inquirer prompt
+
+            console.log("added a feature!");
+
+            inq.prompt([{
+                name:"header",
+                message:"What's the feature?",
+                type:"input"
+            } , {
+                name:"featureDesc",
+                message:"Describe the feature in more detail",
+                type:"input"
+            } , {
+                name:"screenshot",
+                message:"Enter the filename of a relevant screenshot (Readme Generator will look for that file in the Assets folder).  Leave blank to skip screenshot."
+            }]).then(response=>{
+
+                // Then we run the function again in case they want to add more features
+                addFeature(partialReadme);
+            })
+
+
+        } else {
+            // move on to next section
+            writeReadme(partialReadme);
+        }
+    });
+}
+
+
+
 
 
 // This function takes a string and writes it readme.md
