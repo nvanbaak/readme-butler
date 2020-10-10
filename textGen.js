@@ -101,15 +101,19 @@ function generateReadmeBottom(githubArray, license) {
 
 
     // Get the current year for copyright
-    let thisYear = Date.getFullYear()
+    let thisYear = new Date()
 
     // Add to template
     let outputStr = `## Credits
 
 ${contributorStr}
 
+## License
+
+This project uses the ${license} license.
+
 ------
-© ${thisYear} Nik Van Baak`
+© ${thisYear.getFullYear()} Nik Van Baak`
 
     // Return completed template
     return outputStr;
