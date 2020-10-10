@@ -154,6 +154,8 @@ async function finishReadme(partialReadme) {
 
             if (thirdParty === "yes") {
                 // Ask for more information
+
+                console.log("Sorry, you'll have to add that manually for now");
             } else {
                 // Shut down the loop
                 assetLoop = false;
@@ -167,6 +169,8 @@ async function finishReadme(partialReadme) {
             type:"list",
             choices:["MIT","GNU"]
         });
+
+        // TO DO: we still need to format this data into a markdown string
 
         // And we're done!  Write our masterpiece to a file
         writeReadme(partialReadme);
