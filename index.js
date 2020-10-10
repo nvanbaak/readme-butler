@@ -19,7 +19,7 @@ inq.prompt([
         type:"input",
         name:"projDesc"
     } , {
-        message:"What steps does the user need to take to install the project? (leave blank if none)",
+        message:"What steps does the user need to take to install the project? (leave blank if just 'npm install')",
         name:"install"
     } 
     //, {
@@ -28,15 +28,37 @@ inq.prompt([
     // }
 ]).then((response) => {
 
+    let installStr;
+
+    // Check for install default
+    if(!response.install) {
+        // If the user didn't enter special instructions we use the default
+        installStr = `${response.name} can be installed by entering the following command in the app's directory:
+\`\`\`
+npm install
+\`\`\`
+
+This should install the necessary npm packages and allow the app to run.`;
+    } else {
+        // If the user entered specific instructions we use those instead
+        installStr = response.install;
+    }
+
+
     // Build readme page
     outputStr = `# ${response.projName}
 
 ## Table of Contents
 * [Description](#description)
+* [Installation](#installation)
 
 ## Description
 
-${response.projProb}  ${response.projDesc}`
+${response.projProb}  ${response.projDesc}
+
+## Installation
+
+${installStr}`
 
 
     // Then output to readme file
