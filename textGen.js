@@ -37,7 +37,7 @@ function generateReadmeTop(name, description, install) {
     
     ## Installation
     
-    ${install}
+    ${installStr}
     
     ## Usage\n\n`
     
@@ -46,6 +46,4 @@ function generateReadmeTop(name, description, install) {
     return outputStr;
 }
 
-module.exports = {
-    generateReadmeTop() 
-}
+module.exports.generateReadmeTop = generateReadmeTop;
