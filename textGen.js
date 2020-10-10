@@ -82,22 +82,37 @@ function generateReadmeBottom(githubArray, license) {
 
     // If there's more than one contributor, we make contributors a subsection.  Otherwise we just use the user's github.
     if (githubArray.length > 0) {
-        contributorStr = `### Contributors\n\n`;
+        contributorStr = `### Contributors
+
+* Created by https://github.com/nvanbaak/
+* Co-contributors:\n`;
 
         // Loop through contributors
         for (let i = 0; i < githubArray.length; i++) {
-            contributorStr += `https://github.com/${githubArray[i]}/`;
+            contributorStr += 
+`   * https://github.com/${githubArray[i]}/\n`;
         }
+
+        // When all contributors have been added we add the line break
+        contributorStr += `\n\n`;
     } else {
-        contributorStr = ``;
+        contributorStr = `* Created by https://github.com/nvanbaak/\n\n`;
     }
 
 
+    // Get the current year for copyright
+    let thisYear = Date.getFullYear()
 
-
+    // Add to template
     let outputStr = `## Credits
 
-### Contributors`
+${contributorStr}
+
+------
+© ${thisYear} Nik Van Baak`
+
+    // Return completed template
+    return outputStr;
 }
 
 
