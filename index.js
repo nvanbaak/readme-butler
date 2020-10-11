@@ -192,6 +192,16 @@ async function finishReadme(partialReadme) {
 // This function takes a string and writes it readme.md
 function writeReadme(outputStr) {
 
+    // Create the Output directory if it doesn't exist
+    if (!fs.existsSync("./Output/README.md")) {
+        fs.mkdirSync("./Output");
+    }
+
+    // Output result
+    fs.writeFile(outputPath, newPage, "utf8", function(err) {
+        if (err) throw err;
+    })
+
     // Output function
     fs.writeFile("./Output/README.md",outputStr,"utf8",function(err) {
         if (err) throw err;
