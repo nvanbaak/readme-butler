@@ -7,6 +7,11 @@ const path = require("path");
 // Define global variables
 const localPath = path.normalize("./");
 const username = process.argv[2];
+let repoName = process.argv[3];
+
+if (!repoName) {
+    repoName = process.cwd();
+}
 
 let outputStr = ``;
 
