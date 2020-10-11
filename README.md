@@ -1,4 +1,4 @@
-# Readme Generator
+# Readme Butler
 
 ![repo-size-badge](https://img.shields.io/github/repo-size/nvanbaak/readme-generator)
 ![license-badge](https://img.shields.io/github/license/nvanbaak/readme-generator)
@@ -16,7 +16,7 @@ Writing readmes is repetitive and boring.  So I made a script to do it for you!
 
 ## Installation
 
-Readme Generator can be installed by entering the following command in the app's directory:
+Readme Butler can be installed by entering the following command in the app's directory:
 ```
 npm install
 ```
@@ -25,13 +25,19 @@ This should install the necessary npm packages and allow the app to run.
 
 ## Usage
 
-Once you call the app, you'll be presented with a sequence of Inquirer prompts.  The app takes your answers to generate a readme with markdown styling.  Once you've completed the questions, the readme will be generated in the Output folder.
+Readme Butler expects your github username as an argument, e.g.:
+
+> node readmeButler.js nvanbaak
+
+You may optionally pass the name of a github repo as a second argument.  Otherwise, Readme Butler will assume it's being called inside your project folder and use the pwd as the repo name.
+
+Once you call the app, you'll be presented with a sequence of Inquirer prompts.  The app takes your answers to generate a readme with markdown styling.  The readme will generate inside the current folder once the questions are answered.
 
 ### Automatic Looping
 
 Certain sections of the readme are extensible, e.g. you can keep adding content until you say you're done.
 
-[Readme Generator allows for an arbitrary number of features before moving on](./Assets/featurelooping.png)
+[Readme Butler allows for an arbitrary number of features before moving on](./Assets/featurelooping.png)
 
 ## Credits
 
@@ -42,8 +48,6 @@ Certain sections of the readme are extensible, e.g. you can keep adding content 
 * Several sections are hardcoded to my name and this repo; future updates will let you pick
 * The ability to add third-party resources to the Credits section
 * An automatic Planned Features section
-* Generate readme in the folder that Readme Generator was called in
-* Better name
 
 ## License
 

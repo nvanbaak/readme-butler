@@ -6,6 +6,8 @@ const path = require("path");
 
 // Define global variables
 const localPath = path.normalize("./");
+const username = process.argv[2];
+
 let outputStr = ``;
 
 // Inquirer call to get information
