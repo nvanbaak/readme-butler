@@ -27,7 +27,9 @@ This should install the necessary npm packages and allow the app to run.
 
 Readme Butler expects your github username and the repo as arguments, e.g.:
 
-> node readmeButler.js nvanbaak readme-generator
+```
+> node readmeButler.js nvanbaak readme-butler
+```
 
 Once you call the app, you'll be presented with a sequence of Inquirer prompts.  The app takes your answers to generate a readme with markdown styling.  The readme will generate inside the current folder once the questions are answered.
 
