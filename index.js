@@ -7,11 +7,7 @@ const path = require("path");
 // Define global variables
 const localPath = path.normalize("./");
 const username = process.argv[2];
-let repoName = process.argv[3];
-
-if (!repoName) {
-    repoName = process.cwd();
-}
+const repoName = process.argv[3];
 
 let outputStr = ``;
 
@@ -43,7 +39,7 @@ inq.prompt([
     let descStr = response.projProb + "  " + response.projDesc;
 
     // Generate the first part of the readme
-    outputStr = textGen.generateReadmeTop(response.projName, descStr, response.install, response.workflow);
+    outputStr = textGen.generateReadmeTop(username, repoName, response.projName, descStr, response.install, response.workflow);
 
     // Start the usage section
     addFeature(outputStr);
@@ -107,7 +103,7 @@ async function addFeature(partialReadme) {
                 } // end of alt acquisition
 
                 // Make a new section
-                let newSection = textGen.generateUsage(header, featureDesc, screenshot, imgAltStr);
+                let newSection = textGen.generateUsage(username, header, featureDesc, screenshot, imgAltStr);
 
                 // Add it to the existing readme
                 partialReadme = partialReadme + newSection;
@@ -185,7 +181,7 @@ async function finishReadme(partialReadme) {
         });
 
         // Make a markdown string using the information
-        let readmeBottom = textGen.generateReadmeBottom(accomplices, license);
+        let readmeBottom = textGen.generateReadmeBottom(username, accomplices, license);
 
         // Add to in progress readme
         partialReadme += readmeBottom;

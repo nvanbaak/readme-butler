@@ -1,7 +1,4 @@
-const fs = require("fs");
-const { OutgoingMessage } = require("http");
-
-function generateReadmeTop(name, description, install, workflow) {
+function generateReadmeTop(username, repoName, name, description, install, workflow) {
 
     // First generate install section
 
@@ -25,8 +22,8 @@ This should install the necessary npm packages and allow the app to run.`;
     // Build readme page
     outputStr = `# ${name}
 
-![repo-size-badge](https://img.shields.io/github/repo-size/nvanbaak/readme-generator)
-![license-badge](https://img.shields.io/github/license/nvanbaak/readme-generator)
+![repo-size-badge](https://img.shields.io/github/repo-size/${username}/${repoName})
+![license-badge](https://img.shields.io/github/license/${username}/${repoName})
 
 ## Table of Contents
 * [Description](#description)
@@ -53,13 +50,13 @@ ${workflow}\n\n`
 }
 
 // This function constructs a markdown string for one subsection of the usage section
-function generateUsage(header, description, screenshot, alt) {
+function generateUsage(username, header, description, screenshot, alt) {
 
     let screenshotStr;
 
     // Figure out if there's a screenshot
     if (screenshot) {
-        screenshotStr = `[${alt}](./Assets/${screenshot})\n\n`;
+        screenshotStr = `![${alt}](./Assets/${screenshot})\n\n`;
     } else {
         screenshotStr = "";
     }
@@ -75,7 +72,7 @@ ${screenshotStr}`
 }
 
 // This function generates the Credits and License sections of the readme
-function generateReadmeBottom(githubArray, license) {
+function generateReadmeBottom(username, githubArray, license) {
 
     let contributorStr;
 
@@ -83,7 +80,7 @@ function generateReadmeBottom(githubArray, license) {
     if (githubArray.length > 0) {
         contributorStr = `### Contributors
 
-* Created by https://github.com/nvanbaak/
+* Created by https://github.com/${username}/
 * Co-contributors:\n`;
 
         // Loop through contributors
@@ -95,7 +92,7 @@ function generateReadmeBottom(githubArray, license) {
         // When all contributors have been added we add the line break
         contributorStr += `\n\n`;
     } else {
-        contributorStr = `* Created by https://github.com/nvanbaak/\n\n`;
+        contributorStr = `* Created by https://github.com/${username}/\n\n`;
     }
 
 
@@ -112,7 +109,7 @@ ${contributorStr}
 This project uses the ${license} license.
 
 ------
-© ${thisYear.getFullYear()} Nik Van Baak`
+© ${thisYear.getFullYear()} ${username}`
 
     // Return completed template
     return outputStr;

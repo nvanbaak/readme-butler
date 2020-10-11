@@ -25,11 +25,9 @@ This should install the necessary npm packages and allow the app to run.
 
 ## Usage
 
-Readme Butler expects your github username as an argument, e.g.:
+Readme Butler expects your github username and the repo as arguments, e.g.:
 
-> node readmeButler.js nvanbaak
-
-You may optionally pass the name of a github repo as a second argument.  Otherwise, Readme Butler will assume it's being called inside your project folder and use the pwd as the repo name.
+> node readmeButler.js nvanbaak readme-generator
 
 Once you call the app, you'll be presented with a sequence of Inquirer prompts.  The app takes your answers to generate a readme with markdown styling.  The readme will generate inside the current folder once the questions are answered.
 
@@ -37,7 +35,7 @@ Once you call the app, you'll be presented with a sequence of Inquirer prompts. 
 
 Certain sections of the readme are extensible, e.g. you can keep adding content until you say you're done.
 
-[Readme Butler allows for an arbitrary number of features before moving on](./Assets/featurelooping.png)
+![Readme Butler allows for an arbitrary number of features before moving on](./Assets/featurelooping.png)
 
 ## Credits
 
@@ -45,7 +43,6 @@ Certain sections of the readme are extensible, e.g. you can keep adding content 
 
 ## Planned Features:
 
-* Several sections are hardcoded to my name and this repo; future updates will let you pick
 * The ability to add third-party resources to the Credits section
 * An automatic Planned Features section
 
