@@ -11,40 +11,45 @@ const repoName = process.argv[3];
 
 let outputStr = ``;
 
-// Inquirer call to get information
-inq.prompt([
-    {
-        message:"What is the name of the project?",
-        type:"input",
-        name:"projName"
-    } , {
-        message:"What problem does it target?",
-        type:"input",
-        name:"projProb"
-    } , {
-        message:"What does it do?",
-        type:"input",
-        name:"projDesc"
-    } , {
-        message:"What steps does the user need to take to install the project? (leave blank if just 'npm install')",
-        name:"install"
-    } , {
-        message:"What's the workflow for the app?",
-        type:"input",
-        name:"workflow"
-    }
-]).then((response) => {
+startGen();
 
-    // Combine the strings that make up the description
-    let descStr = response.projProb + "  " + response.projDesc;
+function startGen(user, repo) {
 
-    // Generate the first part of the readme
-    outputStr = textGen.generateReadmeTop(username, repoName, response.projName, descStr, response.install, response.workflow);
+    // Inquirer call to get information
+    inq.prompt([
+        {
+            message:"What is the name of the project?",
+            type:"input",
+            name:"projName"
+        } , {
+            message:"What problem does it target?",
+            type:"input",
+            name:"projProb"
+        } , {
+            message:"What does it do?",
+            type:"input",
+            name:"projDesc"
+        } , {
+            message:"What steps does the user need to take to install the project? (leave blank if just 'npm install')",
+            name:"install"
+        } , {
+            message:"What's the workflow for the app?",
+            type:"input",
+            name:"workflow"
+        }
+    ]).then((response) => {
 
-    // Start the usage section
-    addFeature(outputStr);
+        // Combine the strings that make up the description
+        let descStr = response.projProb + "  " + response.projDesc;
 
-});
+        // Generate the first part of the readme
+        outputStr = textGen.generateReadmeTop(user, repo, response.projName, descStr, response.install, response.workflow);
+
+        // Start the usage section
+        addFeature(outputStr);
+
+    });
+}
 
 // Given a readme that has been written up to the usage section, this function fires until the user signals they're done
 async function addFeature(partialReadme) {
