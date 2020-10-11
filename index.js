@@ -1,8 +1,11 @@
 // Import statements
 const inq = require("inquirer");
 const fs = require("fs");
-const textGen = require("./textGen.js")
+const textGen = require("./textGen.js");
+const path = require("path");
 
+// Define global variables
+const localPath = path.normalize("./");
 let outputStr = ``;
 
 // Inquirer call to get information
@@ -188,22 +191,11 @@ async function finishReadme(partialReadme) {
     }
 }
 
-
 // This function takes a string and writes it readme.md
 function writeReadme(outputStr) {
 
-    // Create the Output directory if it doesn't exist
-    if (!fs.existsSync("./Output/README.md")) {
-        fs.mkdirSync("./Output");
-    }
-
-    // Output result
-    fs.writeFile(outputPath, newPage, "utf8", function(err) {
-        if (err) throw err;
-    })
-
     // Output function
-    fs.writeFile("./Output/README.md",outputStr,"utf8",function(err) {
+    fs.writeFile(localPath + "README.md",outputStr,"utf8",function(err) {
         if (err) throw err;
     });
     
