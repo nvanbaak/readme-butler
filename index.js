@@ -192,8 +192,25 @@ async function finishReadme(partialReadme) {
             choices:["MIT","GNU"]
         });
 
+        let { deploy } = await inq.prompt({
+            name:"deploy",
+            message:"Is the project deployed on github pages?",
+            type:"list",
+            choices:["Yes","No"]
+        });
+
+        // Define deploy string
+        let deployStr = "";
+
+        if (deploy === "Yes") {
+            deployStr = `
+## Visit the deployed app!
+
+> https://${username}.github.io/${repoName}`;
+        }
+
         // Make a markdown string using the information
-        let readmeBottom = textGen.generateReadmeBottom(username, accomplices, license);
+        let readmeBottom = textGen.generateReadmeBottom(username, accomplices, license, deploy);
 
         // Add to in progress readme
         partialReadme += readmeBottom;

@@ -72,7 +72,7 @@ ${screenshotStr}`
 }
 
 // This function generates the Credits and License sections of the readme
-function generateReadmeBottom(username, githubArray, license) {
+function generateReadmeBottom(username, githubArray, license, deployStr) {
 
     let contributorStr;
 
@@ -95,6 +95,14 @@ function generateReadmeBottom(username, githubArray, license) {
         contributorStr = `* Created by https://github.com/${username}/\n\n`;
     }
 
+    if (deployStr === "Yes") {
+        deployStr = `
+    ## Visit the deployed app!
+    
+    > https://${username}.github.io/${repoName}`;
+            } else {
+                deployStr = "";
+            }
 
     // Get the current year for copyright
     let thisYear = new Date()
@@ -107,6 +115,7 @@ ${contributorStr}
 ## License
 
 This project uses the ${license} license.
+${deployStr}
 
 ------
 © ${thisYear.getFullYear()} ${username}`
