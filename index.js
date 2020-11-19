@@ -3,15 +3,22 @@ const inq = require("inquirer");
 const fs = require("fs");
 const textGen = require("./textGen.js");
 const path = require("path");
+const { SSL_OP_EPHEMERAL_RSA } = require("constants");
 
 // Define global variables
 const localPath = path.normalize("./");
 const username = process.argv[2];
-const repoName = process.argv[3];
 
 let outputStr = ``;
 
-startGen();
+let repoName = fs.readFileSync(localPath + "readme.md", "utf8",(err, data) => {
+    if (err) {
+        console.log("Could not read readme.md!  Please create a file named 'readme.md' containing ONLY the name of your github repo.");
+        throw err;
+    }
+})
+
+startGen(username, repoName);
 
 function startGen(user, repo) {
 
