@@ -25,7 +25,10 @@ This should install the necessary npm packages and allow the app to run.
 
 ## Usage
 
-Run the project with "node index [your github username]"
+Run the project with 
+```
+node index [your github username]
+```
 
 ## Credits
 
